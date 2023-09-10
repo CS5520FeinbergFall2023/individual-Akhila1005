@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         aboutMe .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String my_name = "Akhila Chiguluri";
+                String my_name = "Akhila Chiguluri ";
                 String my_emailId = "chiguluri.a@northeastern.edu";
                 String message_to_be_toasted = "Name: " + my_name + "\nEmail Id: "+ my_emailId;
                 Toast.makeText(MainActivity.this, message_to_be_toasted, Toast.LENGTH_SHORT).show();
