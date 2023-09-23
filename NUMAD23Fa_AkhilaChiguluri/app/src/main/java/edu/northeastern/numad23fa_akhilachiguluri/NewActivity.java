@@ -18,41 +18,41 @@ public class NewActivity extends AppCompatActivity {
         Button D = findViewById(R.id.D);
         Button E = findViewById(R.id.E);
         Button F = findViewById(R.id.F);
-        TextView Pressed = findViewById(R.id.Pressed);
+        TextView P = findViewById(R.id.P);
         A. setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pressed.setText("Pressed: A");
+                P.setText("Pressed: A");
             }
         });
         B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pressed.setText("Pressed: B");
+                P.setText("Pressed: B");
             }
         });
         C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pressed.setText("Pressed: C");
+                P.setText("Pressed: C");
             }
         });
         D.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pressed.setText("Pressed: D");
+                P.setText("Pressed: D");
             }
         });
         E.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pressed.setText("Pressed: E");
+                P.setText("Pressed: E");
             }
         });
         F.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pressed.setText("Pressed: F");
+                P.setText("Pressed: F");
             }
         });
     }
