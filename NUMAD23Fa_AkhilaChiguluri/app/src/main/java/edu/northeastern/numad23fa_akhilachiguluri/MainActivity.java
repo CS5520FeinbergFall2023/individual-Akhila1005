@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
+import android.content.Intent;
 
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button aboutMe = findViewById(R.id.aboutMe);
+        Button Clicky = findViewById(R.id.Clicky);
         aboutMe .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -23,8 +25,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, message_to_be_toasted, Toast.LENGTH_SHORT).show();
             }
         });
+        Clicky. setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openNewActivity();
+            }
+        });
 
-
+        }
+    public void openNewActivity(){
+        Intent i = new Intent(this,NewActivity.class);
+        startActivity(i);
     }
 
 }
