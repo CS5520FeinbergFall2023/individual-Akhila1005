@@ -7,34 +7,49 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/Clicky"
-        android:layout_width="wrap_content"
-        android:layout_height="67dp"
-        android:text="Clicky Clicky"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutMe" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="116dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="148dp"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Clicky" />
-
-    <Button
         android:id="@+id/aboutMe"
         android:layout_width="112dp"
         android:layout_height="67dp"
         android:text="About Me"
         app:layout_constraintBottom_toTopOf="@+id/Clicky"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Clicky"
+        android:layout_width="wrap_content"
+        android:layout_height="67dp"
+        android:layout_marginBottom="44dp"
+        android:text="Clicky Clicky"
+        app:layout_constraintBottom_toTopOf="@+id/LC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="154dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="244dp"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/LC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="160dp"
+        android:text="Link Collector"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
