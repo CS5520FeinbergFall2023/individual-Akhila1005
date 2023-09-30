@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button aboutMe = findViewById(R.id.aboutMe);
         Button Clicky = findViewById(R.id.Clicky);
+        Button LC = findViewById(R.id.LC);
 
         aboutMe .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         }
+        public void onClick(View view){
+        }
         public void openAboutMeActivity(){
         Intent i = new Intent(this, AboutMeActivity.class);
         startActivity(i);
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public void openNewActivity(){
         Intent i = new Intent(this,NewActivity.class);
         startActivity(i);
+    }
+    public void openLCActivity(){
+
     }
 
 }
