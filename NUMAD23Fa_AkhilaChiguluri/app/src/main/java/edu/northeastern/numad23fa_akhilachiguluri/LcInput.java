@@ -15,12 +15,12 @@ import androidx.fragment.app.DialogFragment;
 
 
 public class LcInput extends DialogFragment {
-    private LcActivity activity;
+    private LcActivity ac_activity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = (LcActivity) getActivity();
+        ac_activity = (LcActivity) getActivity();
     }
 
     @NonNull
@@ -31,7 +31,7 @@ public class LcInput extends DialogFragment {
         EditText linkNameInput = view.findViewById(R.id.link_name_input);
         EditText linkUrlInput = view.findViewById(R.id.link_url_input);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ac_activity);
         builder.setView(view)
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.Add), new DialogInterface.OnClickListener() {
@@ -41,9 +41,9 @@ public class LcInput extends DialogFragment {
                         String url = linkUrlInput.getText().toString();
                         LcItem linkCollectorUnit = new LcItem(name, url);
                         if (linkCollectorUnit.isValid()) {
-                            activity.addLink(linkCollectorUnit);
+                            ac_activity.addLink(linkCollectorUnit);
                         } else {
-                            activity.showSnackbar(getString(R.string.link_invalid));
+                            ac_activity.showSnackbar(getString(R.string.link_invalid));
                         }
                     }
                 })

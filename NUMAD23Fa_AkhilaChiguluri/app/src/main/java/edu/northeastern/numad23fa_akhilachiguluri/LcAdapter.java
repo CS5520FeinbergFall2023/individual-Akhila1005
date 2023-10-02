@@ -11,41 +11,41 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class LcAdapter extends RecyclerView.Adapter<LcHolder> {
-    private Context mContext;
-    private ArrayList<LcItem> mDataList;
-    private clickListener mItemClickListener;
-    private longListener mItemLongClickListener;
+    private Context ac_context;
+    private ArrayList<LcItem> myDataList;
+    private clickListener myItemClickListener;
+    private longListener myItemLongClickListener;
 
     public LcAdapter(Context context, ArrayList<LcItem> dataList) {
-        this.mContext = context;
-        this.mDataList = dataList;
+        this.ac_context = context;
+        this.myDataList = dataList;
     }
 
     public void setOnItemClickListener(clickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
+        this.myItemClickListener = itemClickListener;
     }
 
     public void setOnItemLongClickListener(longListener itemLongClickListener) {
-        this.mItemLongClickListener = itemLongClickListener;
+        this.myItemLongClickListener = itemLongClickListener;
     }
 
     @NonNull
     @Override
     public LcHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_lc_item, parent, false);
-        return new LcHolder(view, mItemClickListener, mItemLongClickListener);
+        return new LcHolder(view, myItemClickListener, myItemLongClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LcHolder viewHolder, int position) {
-        LcItem currentItem = mDataList.get(position);
-        viewHolder.itemName.setText(mContext.getString(R.string.ItemNameValuePair, currentItem.getItemName()));
-        viewHolder.itemURL.setText(mContext.getString(R.string.ItemDescriptionValuePair, currentItem.getItemUrl()));
+        LcItem currentItem = myDataList.get(position);
+        viewHolder.itemName.setText(ac_context.getString(R.string.ItemNameValuePair, currentItem.getItemName()));
+        viewHolder.itemURL.setText(ac_context.getString(R.string.ItemDescriptionValuePair, currentItem.getItemUrl()));
     }
 
     @Override
     public int getItemCount() {
-        return mDataList.size();
+        return myDataList.size();
     }
 
     public interface clickListener {
@@ -53,7 +53,7 @@ public class LcAdapter extends RecyclerView.Adapter<LcHolder> {
     }
 
     public void setDataList(ArrayList<LcItem> dataList) {
-        this.mDataList = dataList;
+        this.myDataList = dataList;
         notifyDataSetChanged();
     }
 

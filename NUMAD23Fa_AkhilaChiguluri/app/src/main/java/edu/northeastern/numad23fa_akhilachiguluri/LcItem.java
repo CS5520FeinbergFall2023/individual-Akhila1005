@@ -13,46 +13,46 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LcItem implements Parcelable {
-    private String linkName;
-    private String linkUrl;
+    private String itemName;
+    private String itemUrl;
 
-    public LcItem(String linkName, String linkUrl) {
-        this.linkName = linkName;
-        this.linkUrl = linkUrl;
+    public LcItem(String itemName, String itemUrl) {
+        this.itemName = itemName;
+        this.itemUrl = itemUrl;
     }
 
     public void onLinkUnitClicked(Context context) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkUrl));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemUrl));
         context.startActivity(browserIntent);
     }
 
     public String getItemName() {
-        return linkName;
+        return itemName;
     }
 
     public String getItemUrl() {
-        return linkUrl;
+        return itemUrl;
     }
 
     public boolean isValid() {
         try {
-            new URL(linkUrl).toURI();
+            new URL(itemUrl).toURI();
         } catch (MalformedURLException | URISyntaxException e) {
             return false;
         }
-        return Patterns.WEB_URL.matcher(linkUrl).matches();
+        return Patterns.WEB_URL.matcher(itemUrl).matches();
     }
 
 
     protected LcItem(Parcel in) {
-        linkName = in.readString();
-        linkUrl = in.readString();
+        itemName = in.readString();
+        itemUrl = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(linkName);
-        dest.writeString(linkUrl);
+        dest.writeString(itemName);
+        dest.writeString(itemUrl);
     }
 
     @Override

@@ -24,14 +24,15 @@ import java.util.ArrayList;
 
 public class LcActivity extends AppCompatActivity {
     private ArrayList<LcItem> linkCollectorUnitList;
-    private AlertDialog inputAlertDialog;
-    private EditText linkNameInput;
+    private AlertDialog inputDialogAlert;
+    private EditText inputLinkName;
     private RecyclerView recyclerView;
-    private LcAdapter linkCollectorViewAdapter;
-    private EditText linkUrlInput;
-    private static final String KEY_LINK_UNIT_LIST = "link_unit_list";
+    private LcAdapter lcAdapter;
+    private EditText inputLinkUrl;
+    private static final String KEY_LINK_ITEM_LIST = "link_unit_list";
     private static final String KEY_ADD_BUTTON_CLICKED = "add_button_clicked";
-    private boolean isAddButtonClicked = false;
+    private boolean addButtonClicked = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +41,18 @@ public class LcActivity extends AppCompatActivity {
         FloatingActionButton addLinkButton = findViewById(R.id.floatingButton);
 
         if (savedInstanceState != null) {
-            isAddButtonClicked = savedInstanceState.getBoolean(KEY_ADD_BUTTON_CLICKED, false);
+            addButtonClicked = savedInstanceState.getBoolean(KEY_ADD_BUTTON_CLICKED, false);
         }
 
         addLinkButton.setOnClickListener(v -> {
-            isAddButtonClicked = true;
+            addButtonClicked = true;
             showInput();
         });
 
         linkCollectorUnitList = new ArrayList<>();
         createInputAlertDialog();
         createRecyclerView();
-        linkCollectorViewAdapter.setOnItemClickListener(position -> linkCollectorUnitList.get(position).onLinkUnitClicked(this));
+        lcAdapter.setOnItemClickListener(position -> linkCollectorUnitList.get(position).onLinkUnitClicked(this));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -69,19 +70,19 @@ public class LcActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         if (savedInstanceState != null) {
-            linkCollectorUnitList = savedInstanceState.getParcelableArrayList(KEY_LINK_UNIT_LIST);
-            linkCollectorViewAdapter.setDataList(linkCollectorUnitList);
+            linkCollectorUnitList = savedInstanceState.getParcelableArrayList(KEY_LINK_ITEM_LIST);
+            lcAdapter.setDataList(linkCollectorUnitList);
         }
 
-        linkCollectorViewAdapter.setOnItemLongClickListener(this::showEditDialog);
+        lcAdapter.setOnItemLongClickListener(this::showEditDialog);
     }
 
     public void createInputAlertDialog() {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.activity_lc_input, null);
 
-        linkNameInput = view.findViewById(R.id.link_name_input);
-        linkUrlInput = view.findViewById(R.id.link_url_input);
+        inputLinkName = view.findViewById(R.id.link_name_input);
+        inputLinkUrl = view.findViewById(R.id.link_url_input);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(view);
@@ -90,7 +91,7 @@ public class LcActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.Add),
                         (dialog, id) -> {
-                            LcItem linkCollectorUnit = new LcItem(linkNameInput.getText().toString(), linkUrlInput.getText().toString());
+                            LcItem linkCollectorUnit = new LcItem(inputLinkName.getText().toString(), inputLinkUrl.getText().toString());
                             if (linkCollectorUnit.isValid()) {
                                 linkCollectorUnitList.add(0, linkCollectorUnit);
                                 Snackbar.make(recyclerView, getString(R.string.link_add_success), Snackbar.LENGTH_LONG).show();
@@ -101,15 +102,15 @@ public class LcActivity extends AppCompatActivity {
                 .setNegativeButton(getString(R.string.Cancel),
                         (dialog, id) -> dialog.cancel());
 
-        inputAlertDialog = alertDialogBuilder.create();
+        inputDialogAlert = alertDialogBuilder.create();
     }
 
     public void createRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        linkCollectorViewAdapter = new LcAdapter(this, linkCollectorUnitList);
+        lcAdapter = new LcAdapter(this, linkCollectorUnitList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setAdapter(linkCollectorViewAdapter);
+        recyclerView.setAdapter(lcAdapter);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -120,7 +121,7 @@ public class LcActivity extends AppCompatActivity {
 
     public void addLink(LcItem linkCollectorUnit) {
         linkCollectorUnitList.add(0, linkCollectorUnit);
-        linkCollectorViewAdapter.notifyDataSetChanged();
+        lcAdapter.notifyDataSetChanged();
         showSnackbar(getString(R.string.link_add_success));
     }
 
@@ -130,8 +131,8 @@ public class LcActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(KEY_LINK_UNIT_LIST, linkCollectorUnitList);
-        outState.putBoolean(KEY_ADD_BUTTON_CLICKED, isAddButtonClicked);
+        outState.putParcelableArrayList(KEY_LINK_ITEM_LIST, linkCollectorUnitList);
+        outState.putBoolean(KEY_ADD_BUTTON_CLICKED, addButtonClicked);
     }
 
     private void showEditDialog(int position) {
@@ -157,7 +158,7 @@ public class LcActivity extends AppCompatActivity {
                             } else {
                                 LcItem updatedLinkCollectorUnit = new LcItem(updatedName, updatedUrl);
                                 linkCollectorUnitList.set(position, updatedLinkCollectorUnit);
-                                linkCollectorViewAdapter.notifyDataSetChanged();
+                                lcAdapter.notifyDataSetChanged();
                                 Snackbar.make(recyclerView, getString(R.string.link_updated_success), Snackbar.LENGTH_LONG).show();
                             }
                         })
