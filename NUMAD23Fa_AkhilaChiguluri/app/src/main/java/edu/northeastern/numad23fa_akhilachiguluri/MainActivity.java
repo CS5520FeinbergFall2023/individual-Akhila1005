@@ -58,5 +58,8 @@ Button LC;
         Intent i = new Intent(this,LcActivity.class);
        startActivity(i);
     }
+    public void openPrimeActivity(){
+
+    }
 
 }
