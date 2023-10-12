@@ -19,7 +19,7 @@ public class Prime_num_activity extends AppCompatActivity {
     private TextView recent_prime_text_view;
     private Button find_prime_num;
     private Button terminate_search;
-    private CheckBox pacify_search;
+    private CheckBox pacifier_search;
     private volatile boolean isSearching;
     private volatile int current_num = 3;
     private volatile int latest_prime;
@@ -35,7 +35,7 @@ public class Prime_num_activity extends AppCompatActivity {
 
         current_num_text_view = findViewById(R.id.current_num);
         recent_prime_text_view = findViewById(R.id.latest_num);
-        pacify_search = findViewById(R.id.pacifier_search);
+        pacifier_search = findViewById(R.id.pacifier_search);
         find_prime_num = findViewById(R.id.find_prime_num);
         terminate_search = findViewById(R.id.terminate_search);
 
