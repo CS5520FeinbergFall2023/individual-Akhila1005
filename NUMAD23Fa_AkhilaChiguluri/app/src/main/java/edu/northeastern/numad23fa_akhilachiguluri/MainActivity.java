@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 Button aboutMe;
 Button Clicky;
 Button LC;
+Button prime_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,16 @@ Button LC;
                 openLcActivity();
             }
         });
+        prime_num = findViewById(R.id.prime_num);
+        prime_num.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPrimeActivity();
+            }
+        });
         }
+
+
 
         public void openAboutMeActivity(){
         Intent i = new Intent(this, AboutMeActivity.class);
@@ -59,7 +69,8 @@ Button LC;
        startActivity(i);
     }
     public void openPrimeActivity(){
-
+        Intent i = new Intent(this, Prime_num_activity.class);
+        startActivity(i);
     }
 
 }
