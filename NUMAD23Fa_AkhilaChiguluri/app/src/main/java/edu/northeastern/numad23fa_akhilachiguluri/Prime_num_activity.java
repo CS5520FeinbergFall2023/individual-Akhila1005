@@ -14,6 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Prime_num_activity extends AppCompatActivity {
     private TextView current_num_text_view;
     private TextView recent_prime_text_view;
@@ -25,8 +28,11 @@ public class Prime_num_activity extends AppCompatActivity {
     private volatile int latest_prime;
     private Handler main_handler;
     private Thread primary_search_thread;
+    private Timer timer;
+    private Handler textHandler = new Handler(Looper.getMainLooper());
 
 
+    private static final int update_the_time_interval = 12345;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,37 +108,38 @@ public class Prime_num_activity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void startPrimeSearch() {
-        isSearching = true;
-        find_prime_num.setEnabled(false);
-        terminate_search.setEnabled(true);
+private void startPrimeSearch() {
+    isSearching = true;
+    timer = new Timer();
 
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            if (isPrime(current_num)) {
+                latest_prime = current_num;
+                textHandler.post(() -> {
+                            main_handler.post(new Runnable() {
+                                @Override
+                        public void run() {
+                            current_num_text_view.setText("Current Number: " + current_num);
+                        }
+                    });
 
-        primary_search_thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int numbersChecked = 0;
+                });
+                textHandler.post(() -> {
+                    main_handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recent_prime_text_view.setText("Latest Prime: " + latest_prime);
+                        }
+                    });
 
-                while (isSearching) {
-                    if (isPrime(current_num)) {
-                        latest_prime = current_num;
-
-
-                        updateUI();
-                    }
-                    current_num+=1;
-                    for (int i=0;i<10000000;i++){
-                        int z=0;
-                        z+=1;
-                    }
-                }
-
+                });
             }
-
-
-        });
-        primary_search_thread.start();
-    }
+            current_num += 2;
+        }
+        }, 0, update_the_time_interval);
+}
 
     private void stopPrimeSearch() {
         isSearching = false;
