@@ -13,6 +13,7 @@ Button aboutMe;
 Button Clicky;
 Button LC;
 Button prime_num;
+Button location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,13 @@ Button prime_num;
                 openPrimeActivity();
             }
         });
+        location = findViewById(R.id.location);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLocationActivity();
+            }
+        });
         }
 
 
@@ -70,6 +78,10 @@ Button prime_num;
     }
     public void openPrimeActivity(){
         Intent i = new Intent(this, Prime_num_activity.class);
+        startActivity(i);
+    }
+    public void openLocationActivity(){
+        Intent i = new Intent(this, LocationActivity.class);
         startActivity(i);
     }
 
