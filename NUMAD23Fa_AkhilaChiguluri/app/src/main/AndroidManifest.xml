@@ -14,10 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_ac_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD23Fa_AkhilaChiguluri"
+        android:configChanges="orientation|screenSize"
         tools:targetApi="31">
         <activity
             android:name=".LocationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Prime_num_activity"
             android:exported="false" />
